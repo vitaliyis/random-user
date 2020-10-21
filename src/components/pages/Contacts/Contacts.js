@@ -115,4 +115,4 @@ const mapDispatchToProps = {
   setSort
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contacts)
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

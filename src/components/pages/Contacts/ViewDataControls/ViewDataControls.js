@@ -13,7 +13,6 @@ const ViewDataControls = props => {
   const {viewTable, toggleViewTable, isLoading, error, getDataFromServer, setSort, setCurrentPage, setFilter, setError} = props;
 
   const updateData = () => {
-    getDataFromServer();
     toggleViewTable(true);
     setSort(NORMAL);
     setCurrentPage(1);
@@ -23,13 +22,14 @@ const ViewDataControls = props => {
       gender: '',
       nationality: ''
     });
+    getDataFromServer();
   }
 
    return (
      <div className="mb-3 d-flex justify-content-between flex-column flex-sm-row">
        <button
          className="btn btn-success mb-2 mb-sm-0"
-         onClick={() => updateData()}
+         onClick={updateData}
          disabled={isLoading}
        >Update data</button>
        {!error &&

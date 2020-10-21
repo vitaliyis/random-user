@@ -2,7 +2,7 @@ import {
   GET_DATA, IS_INITIAL_LOADED,
   IS_LOADING,
   SET_CURRENT_PAGE,
-  SET_ERROR, SET_FILTER_FULL_NAME,
+  SET_ERROR, SET_FILTER,
   SET_SORT,
   TOGGLE_VIEW_TABLE
 } from "./contacts.types";
@@ -59,7 +59,7 @@ export const setSort = payload => {
 
 export const setFilter = payload => {
   return {
-    type: SET_FILTER_FULL_NAME,
+    type: SET_FILTER,
     payload
   }
 }

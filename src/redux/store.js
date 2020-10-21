@@ -9,4 +9,4 @@ store.subscribe(() => {
   localStorage['redux-store'] = JSON.stringify(store.getState().contacts);
 })
 
-export default store
+export default store;

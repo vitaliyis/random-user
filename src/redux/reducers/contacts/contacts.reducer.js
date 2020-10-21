@@ -2,7 +2,7 @@ import {
   GET_DATA, IS_INITIAL_LOADED,
   IS_LOADING,
   SET_CURRENT_PAGE,
-  SET_ERROR, SET_FILTER_FULL_NAME,
+  SET_ERROR, SET_FILTER,
   SET_QUANTITY_PAGE, SET_SORT,
   TOGGLE_VIEW_TABLE
 } from "./contacts.types";
@@ -77,7 +77,7 @@ const contactsReducer = (state = initialState, action) => {
         sort: payload
       }
 
-    case SET_FILTER_FULL_NAME:
+    case SET_FILTER:
       return {
         ...state,
         filter: {...state.filter, ...payload}

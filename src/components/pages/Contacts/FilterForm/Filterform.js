@@ -26,7 +26,8 @@ const FilterForm = props => {
     setCurrentPage(1);
   }
 
-  const clearFilters = () => {
+  const clearFilters = (e) => {
+    e.preventDefault();
     setFilter({
       fullName: '',
       gender: '',
