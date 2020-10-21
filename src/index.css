@@ -85,6 +85,12 @@ p {
   margin-bottom: 1rem;
 }
 
+.tiled-item-email {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .card {
   height: 100%;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);

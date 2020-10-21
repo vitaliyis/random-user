@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {CopyToClipboard} from "react-copy-to-clipboard";
-import {transformDate} from "../../../../../utils/utils";
+import {getPhone, transformDate} from "../../../../../utils/utils";
 
 const TableItem = props => {
   const [copyEmail, setCopyEmail] = useState('');
@@ -41,13 +41,13 @@ const TableItem = props => {
         <p>{item.dob.age} years</p>
       </td>
       <td>
-        <p>{item.email}</p>
+        <p><a href={`mailto:${item.email}`}>{item.email}</a></p>
         <CopyToClipboard onCopy={onCopyEmail} text={item.email}>
           <button className={`btn ${copyEmail ? "btn-outline-success" : "btn-outline-primary"} btn-sm btn-clipboard`}>{`${copyEmail ? copyEmail : "copy"}`}</button>
         </CopyToClipboard>
       </td>
       <td>
-        <p>{item.phone}</p>
+        <p><a href={`tel:${getPhone(item.phone)}`}>{item.phone}</a></p>
         <CopyToClipboard onCopy={onCopyPhone} text={item.phone}>
           <button className={`btn ${copyPhone ? "btn-outline-success" : "btn-outline-primary"} btn-sm btn-clipboard`}>{`${copyPhone ? copyPhone : "copy"}`}</button>
         </CopyToClipboard>

@@ -7,10 +7,9 @@ const Pagination4 = (props) => {
     <nav className="nav-pagination">
       <ul className="pagination">
         <li className="page-item" key={1}>
-          <a className="page-link"
-             href="#"
+          <button className="page-link"
              onClick={() => setCurrentPage(1)}
-          >{1}</a>
+          >{1}</button>
         </li>
         <li className="page-item" key={2}><span className="page-link">...</span></li>
         {numberPages.map(item => {
@@ -18,10 +17,9 @@ const Pagination4 = (props) => {
             ? <li className="page-item active" key={item}><span className="page-link">{item}</span></li>
             : item >= numberPages.length - sizeChangePagination
               ? <li className="page-item" key={item}>
-                  <a className="page-link"
-                     href="#"
+                  <button className="page-link"
                      onClick={() => setCurrentPage(item)}
-                  >{item}</a>
+                  >{item}</button>
                 </li>
               : null
         })}

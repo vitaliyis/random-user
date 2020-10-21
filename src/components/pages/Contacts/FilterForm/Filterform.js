@@ -1,13 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
+  setCurrentPage,
   setFilter,
 } from "../../../../redux/reducers/contacts/contacts.actions";
 import {getListNationalities} from "../../../../utils/utils";
 
 const FilterForm = props => {
 
-  const {filter, setFilter, data} = props;
+  const {filter, data, setFilter, setCurrentPage} = props;
 
   const genders = [
     {id: 1, name: 'Genders', value: ''},
@@ -22,14 +23,22 @@ const FilterForm = props => {
     const name = e.target.name;
     const value = e.target.value;
     setFilter({[name]: value});
-    // console.log('filter', filter);
+    setCurrentPage(1);
+  }
+
+  const clearFilters = () => {
+    setFilter({
+      fullName: '',
+      gender: '',
+      nationality: ''
+    });
   }
 
   return (
     <div className="mb-2">
       <form action="">
         <div className="row">
-          <div className="col">
+          <div className="col-md-4 mb-2 mb-md-0">
             <input
               type="text"
               className="form-control"
@@ -39,7 +48,7 @@ const FilterForm = props => {
               onChange={onChange}
             />
           </div>
-          <div className="col">
+          <div className="col-md-3 mb-2 mb-md-0">
             <select
               className="form-control"
               name="gender"
@@ -51,7 +60,7 @@ const FilterForm = props => {
               ))}
             </select>
           </div>
-          <div className="col">
+          <div className="col-md-3 mb-2 mb-md-0">
             <select
               className="form-control"
               name="nationality"
@@ -63,6 +72,12 @@ const FilterForm = props => {
               ))}
             </select>
           </div>
+          <div className="col-md-2 mb-2 mb-md-0">
+            <button
+              className="btn btn-outline-primary w-100"
+              onClick={clearFilters}
+            >Clear</button>
+          </div>
         </div>
       </form>
     </div>
@@ -71,13 +86,13 @@ const FilterForm = props => {
 
 const mapStateToProps = (state) => {
   return {
-    filter: state.contactsReducer.filter,
-    data: state.contactsReducer.data
+    filter: state.contacts.filter,
   }
 }
 
 const mapDispatchToProps = {
-  setFilter
+  setFilter,
+  setCurrentPage
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterForm);

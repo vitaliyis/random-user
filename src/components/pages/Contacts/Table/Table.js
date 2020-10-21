@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {CopyToClipboard} from "react-copy-to-clipboard";
+import React from 'react';
 import TableItem from "./TableItem/TableItem";
 import ArrowMark from "./ArrowMark/ArrowMark";
 import {NORMAL, SORT_ASC, SORT_DESC} from "../../../../constans/constans";
@@ -28,13 +27,10 @@ const Table = props => {
     switch (sort) {
       case NORMAL:
         return "Sort by asc";
-        break;
       case SORT_ASC:
         return "Sort by desc";
-        break;
       case SORT_DESC:
         return "Sort by normal";
-        break;
       default:
         break;
     }
@@ -73,4 +69,4 @@ const Table = props => {
   )
 }
 
-export default Table
+export default Table;

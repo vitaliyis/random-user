@@ -15,6 +15,9 @@ export const Navbar = () => {
           <li className="nav-item">
             <NavLink className="nav-link" to="/contacts">Contacts</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/aboutme">About me</NavLink>
+          </li>
         </ul>
       </div>
     </nav>

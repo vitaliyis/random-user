@@ -11,18 +11,16 @@ const Pagination2 = (props) => {
             ? <li className="page-item active" key={item}><span className="page-link">{item}</span></li>
             : item <= sizeChangePagination + 1//<= 5
                 ? <li className="page-item" key={item}>
-                <a className="page-link"
-                   href="#"
+                <button className="page-link"
                    onClick={() => setCurrentPage(item)}
-                >{item}</a></li>
+                >{item}</button></li>
                 : null
         })}
         <li className="page-item" key={numberPages.length - 2}><span className="page-link">...</span></li>
         <li className="page-item" key={numberPages.length - 1}>
-          <a className="page-link"
-             href="#"
+          <button className="page-link"
              onClick={() => setCurrentPage(numberPages.length)}
-          >{numberPages.length}</a>
+          >{numberPages.length}</button>
         </li>
       </ul>
     </nav>

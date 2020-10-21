@@ -3,7 +3,6 @@ import React from 'react'
 const Pagination1 = (props) => {
   const {currentPage, numberPages, setCurrentPage} = props
 
-
   return (
     <nav className="nav-pagination">
       <ul className="pagination">
@@ -11,11 +10,10 @@ const Pagination1 = (props) => {
           return currentPage === item
             ? <li className="page-item active" key={item}><span className="page-link">{item}</span></li>
             : <li className="page-item" key={item}>
-              <a className="page-link"
-                 href="#"
+              <button className="page-link"
                  onClick={() => setCurrentPage(item)}
               >{item}
-              </a>
+              </button>
             </li>
         })}
       </ul>

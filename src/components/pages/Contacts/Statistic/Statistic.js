@@ -15,7 +15,7 @@ const Statistic = props => {
   return (
     <div className="statistic mt-3 p-3 mb-3">
       <h5>Statistic:</h5>
-      <div className="statistic-row d-flex justify-content-between mb-3">
+      <div className="statistic-row d-flex justify-content-between mb-3 flex-column flex-sm-row text-center text-sm-left">
         <div className="statistic-item">
           <p className="statistic-item-title">Collection size</p>
           <p className="statistic-item-content">{props.data.length}</p>

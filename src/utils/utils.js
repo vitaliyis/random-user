@@ -60,29 +60,27 @@ export const getListNationalities = data => {
   let isFind = false;
   let idNat = 0;
 
+  result.push({
+    id: idNat,
+    name: 'Nationality',
+    value: ''
+  });
+
   data.forEach(item => {
-    if (!result.length) {
-      result.push({
-        id: idNat,
-        name: 'Nationality',
-        value: ''
-      });
-    } else {
-      for (let i = 0; i < result.length; i++) {
-        if (item.nat === result[i].name) {
-          isFind = true;
-          break;
-        }
+    for (let i = 0; i < result.length; i++) {
+      if (item.nat === result[i].name) {
+        isFind = true;
+        break;
       }
-      if (!isFind) {
-        result.push({
-          id: idNat++,
-          name: item.nat,
-          value: item.nat
-        })
-      }
-      isFind = false;
     }
+    if (!isFind) {
+      result.push({
+        id: idNat++,
+        name: item.nat,
+        value: item.nat
+      })
+    }
+    isFind = false;
   })
 
   return result;
@@ -144,14 +142,32 @@ export const getDataByCurrentPage = (data, sizePage, currentPage) => {
   return data.slice(beginPage, endPage);
 }
 
-export const filterData = (data, mark) => {
-  if (mark) {
-    return data.filter(item => item.fullName.includes(mark));
-  } else {
-    return data;
+export const filterData = (data, fullName, gender, nationality) => {
+  let resultData = data;
+
+  if (fullName) {
+    resultData = resultData.filter(item => item.fullName.toLocaleLowerCase().includes(fullName.toLocaleLowerCase()));
   }
+
+  if (gender) {
+    resultData = resultData.filter(item => item.gender.toLocaleLowerCase().includes(gender.toLocaleLowerCase()) && item.gender.length === gender.length);
+  }
+
+  if (nationality) {
+    resultData = resultData.filter(item => item.nat.toLocaleLowerCase().includes(nationality.toLocaleLowerCase()));
+  }
+
+  return resultData;
 }
 
 export const getQuantityPage = data => {
   if (data.length) { return Math.ceil(data.length / 50) }
+}
+
+export const getPhone = telStr => {
+  if (telStr) {
+    let reg = new RegExp(/[-()/\\]/g);
+    return telStr.replace(reg,'');
+  }
+  return '';
 }

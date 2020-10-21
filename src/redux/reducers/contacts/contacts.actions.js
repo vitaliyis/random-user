@@ -1,9 +1,9 @@
 import {
-  GET_DATA,
+  GET_DATA, IS_INITIAL_LOADED,
   IS_LOADING,
   SET_CURRENT_PAGE,
   SET_ERROR, SET_FILTER_FULL_NAME,
-  SET_QUANTITY_PAGE, SET_SORT,
+  SET_SORT,
   TOGGLE_VIEW_TABLE
 } from "./contacts.types";
 import {fetchGetData} from "../../../api/api";
@@ -29,9 +29,9 @@ export const isLoading = payload => {
   }
 }
 
-export const setQuantityPage = payload => {
+export const setInitialLoaded = payload => {
   return {
-    type: SET_QUANTITY_PAGE,
+    type: IS_INITIAL_LOADED,
     payload
   }
 }
@@ -43,11 +43,7 @@ export const setCurrentPage = payload => {
   }
 }
 
-const getQuantityPage = data => {
-  if (data.length) { return Math.ceil(data.length / 50) }
-}
-
-const setError = payload => {
+export const setError = payload => {
   return {
     type: SET_ERROR,
     payload
@@ -70,17 +66,19 @@ export const setFilter = payload => {
 
 // thunkCreators =======================================================
 export const getDataFromServer = () => dispatch => {
-  dispatch(isLoading(true))
-  fetchGetData()
-    .then(data => {
-      if (data.results) {
-        dispatch(setQuantityPage(getQuantityPage(data.results)));
-        dispatch(getData(data.results));
-      }
-      dispatch(isLoading(false));
-    })
-    .catch(err => {
-      console.log('err actions => ', err);
-      dispatch(setError(err));
-    })
+  dispatch(isLoading(true));
+    fetchGetData()
+      .then(data => {
+        if (data.results) {
+          dispatch(getData(data.results));
+          dispatch(setInitialLoaded(true));
+        } else {
+          dispatch(setError(`Error: ${data.error || data}!. Please try to run later.`));
+        }
+        dispatch(isLoading(false));
+      })
+      .catch(err => {
+        console.error('err actions => ', err);
+        dispatch(setError(err));
+      })
 }

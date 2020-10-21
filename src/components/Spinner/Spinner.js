@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Spinner = props => {
+const Spinner = () => {
   return(
     <div className="text-center">
       <div className="spinner-border" role="status">
@@ -10,4 +10,4 @@ const Spinner = props => {
   )
 }
 
-export default Spinner
+export default Spinner;

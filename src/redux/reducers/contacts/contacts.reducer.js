@@ -1,5 +1,5 @@
 import {
-  GET_DATA,
+  GET_DATA, IS_INITIAL_LOADED,
   IS_LOADING,
   SET_CURRENT_PAGE,
   SET_ERROR, SET_FILTER_FULL_NAME,
@@ -8,22 +8,27 @@ import {
 } from "./contacts.types";
 import {NORMAL} from "../../../constans/constans";
 
-const initialState = {
-  dataOriginal: [],
-  data: [],
-  viewTable: true,
-  isLoading: false,
-  pagination: {
-    quantityPage: null,
-    currentPage: 1,
-    sizePage: 50
-  },
-  error: '',
-  sort: NORMAL,
-  filter: {
-    fullName: '',
-    gender: '',
-    nationality: ''
+let initialState = null;
+
+const localInitialState = localStorage.getItem('redux-store');
+if (localInitialState) {
+  initialState = JSON.parse(localInitialState);
+} else {
+  initialState = {
+    data: [],
+    viewTable: true,
+    isLoading: false,
+    isInitialLoaded: false,
+    pagination: {
+      currentPage: 1,
+    },
+    error: '',
+    sort: NORMAL,
+    filter: {
+      fullName: '',
+      gender: '',
+      nationality: ''
+    }
   }
 }
 
@@ -33,8 +38,7 @@ const contactsReducer = (state = initialState, action) => {
     case GET_DATA:
       return {
         ...state,
-        data: payload,
-        dataOriginal: payload
+        data: payload
       }
 
     case TOGGLE_VIEW_TABLE:
@@ -77,6 +81,12 @@ const contactsReducer = (state = initialState, action) => {
       return {
         ...state,
         filter: {...state.filter, ...payload}
+      }
+
+    case IS_INITIAL_LOADED:
+      return {
+        ...state,
+        isInitialLoaded: payload
       }
 
     default:
