@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const store =createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 store.subscribe(() => {
-  localStorage['redux-store'] = JSON.stringify(store.getState().contacts);
+  localStorage['contacts-store'] = JSON.stringify(store.getState().contacts);
 })
 
 export default store;

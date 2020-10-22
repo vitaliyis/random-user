@@ -39,40 +39,55 @@ const Contacts = props => {
     if(!isInitialLoaded) getDataFromServer();
   }, [isInitialLoaded, getDataFromServer]);
 
+  if (error) {
+    return (
+      <>
+        <h2 className="mt-3 mb-3">Contacts</h2>
+        <ViewDataControls/>
+        <div><strong>{`Error=> ${error}!. Please try to run later.`}</strong></div>
+      </>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <h2 className="mt-3 mb-3">Contacts</h2>
+        <ViewDataControls/>
+        <Spinner/>
+      </>
+    )
+  }
+
   return (
     <>
       <h2 className="mt-3 mb-3">Contacts</h2>
 
       <ViewDataControls/>
 
-      {error && <div><strong>{error}</strong></div>}
+      <FilterForm data={data}/>
 
-      {!isLoading && !error && <FilterForm data={data}/>}
-
-      { !isLoading && !error && quantityPage > 1
-        ? <PaginationContainer
+      { quantityPage > 1 &&
+        <PaginationContainer
           currentPage={currentPage}
           quantityPage={quantityPage}
           setCurrentPage={setCurrentPage}
         />
-        : null
       }
 
-      { isLoading ? <Spinner/> :
-        !error && viewTable
+      {viewTable
           ? <Table data={dataCurrentPage} sort={sort} setSort={setSort}/>
-          : !error && <Tiled data={dataCurrentPage}/>
+          : <Tiled data={dataCurrentPage}/>
       }
 
-      {!isLoading && !error && <Statistic data={data}/>}
+      <Statistic data={data}/>
 
-      { !isLoading && !error && quantityPage > 1
-        ? <PaginationContainer
+      { quantityPage > 1 &&
+        <PaginationContainer
           currentPage={currentPage}
           quantityPage={quantityPage}
           setCurrentPage={setCurrentPage}
         />
-        : null
       }
     </>
   )

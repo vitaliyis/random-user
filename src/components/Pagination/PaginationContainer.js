@@ -4,11 +4,11 @@ import Pagination2 from "./Pagination2";
 import Pagination3 from "./Pagination3";
 import Pagination4 from "./Pagination4";
 
+const lengthPagination = 7
+const sizeChangePagination = 4    // если currentPage выходит за его предел то пагинация меняется
+
 const PaginationContainer = (props) => {
   const {quantityPage, currentPage, setCurrentPage} = props
-
-  const lengthPagination = 7
-  const sizeChangePagination = 4    // если currentPage выходит за его предел то пагинация меняется
 
   const numberPages = []
   for (let i = 1; i <= quantityPage; i++) { numberPages.push(i) }

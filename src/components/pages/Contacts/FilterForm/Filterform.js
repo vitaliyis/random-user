@@ -6,16 +6,16 @@ import {
 } from "../../../../redux/reducers/contacts/contacts.actions";
 import {getListNationalities} from "../../../../utils/utils";
 
+const genders = [
+  {id: 1, name: 'Genders', value: ''},
+  {id: 2, name: 'Male', value: 'male'},
+  {id: 3, name: 'Female', value: 'female'},
+  {id: 4, name: 'Indeterminate', value: 'indeterminate'}
+];
+
 const FilterForm = props => {
 
   const {filter, data, setFilter, setCurrentPage} = props;
-
-  const genders = [
-    {id: 1, name: 'Genders', value: ''},
-    {id: 2, name: 'Male', value: 'male'},
-    {id: 3, name: 'Female', value: 'female'},
-    {id: 4, name: 'Indeterminate', value: 'indeterminate'}
-    ];
 
   const nationalities = getListNationalities(data);
 
@@ -69,7 +69,7 @@ const FilterForm = props => {
               onChange={onChange}
             >
               {nationalities.map(nat => (
-                <option key={Math.random()} value={nat.value}>{nat.name}</option>
+                <option key={nat.id} value={nat.value}>{nat.name}</option>
               ))}
             </select>
           </div>

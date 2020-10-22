@@ -8,29 +8,26 @@ import {
 } from "./contacts.types";
 import {NORMAL} from "../../../constans/constans";
 
-let initialState = null;
-
-const localInitialState = localStorage.getItem('redux-store');
-if (localInitialState) {
-  initialState = JSON.parse(localInitialState);
-} else {
-  initialState = {
-    data: [],
-    viewTable: true,
-    isLoading: false,
-    isInitialLoaded: false,
-    pagination: {
-      currentPage: 1,
-    },
-    error: '',
-    sort: NORMAL,
-    filter: {
-      fullName: '',
-      gender: '',
-      nationality: ''
-    }
+const defaultState = {
+  data: [],
+  viewTable: true,
+  isLoading: false,
+  isInitialLoaded: false,
+  pagination: {
+    currentPage: 1,
+  },
+  error: '',
+  sort: NORMAL,
+  filter: {
+    fullName: '',
+    gender: '',
+    nationality: ''
   }
 }
+
+const localInitialState = localStorage.getItem('contacts-store');
+
+const initialState = localInitialState ? JSON.parse(localInitialState) : defaultState;
 
 const contactsReducer = (state = initialState, action) => {
   const {payload} = action

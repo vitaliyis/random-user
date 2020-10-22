@@ -64,7 +64,6 @@ export const setFilter = payload => {
   }
 }
 
-// thunkCreators =======================================================
 export const getDataFromServer = () => dispatch => {
   dispatch(isLoading(true));
     fetchGetData()
@@ -73,7 +72,7 @@ export const getDataFromServer = () => dispatch => {
           dispatch(getData(data.results));
           dispatch(setInitialLoaded(true));
         } else {
-          dispatch(setError(`Error: ${data.error || data}!. Please try to run later.`));
+          dispatch(setError(`${data.error || data}`));
         }
         dispatch(isLoading(false));
       })

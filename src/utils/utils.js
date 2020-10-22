@@ -75,7 +75,7 @@ export const getListNationalities = data => {
     }
     if (!isFind) {
       result.push({
-        id: idNat++,
+        id: ++idNat,
         name: item.nat,
         value: item.nat
       })
