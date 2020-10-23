@@ -166,7 +166,7 @@ export const getQuantityPage = data => {
 
 export const getPhone = telStr => {
   if (telStr) {
-    let reg = new RegExp(/[-()/\\]/g);
+    let reg = new RegExp(/[-()/ /\\]/g);
     return telStr.replace(reg,'');
   }
   return '';

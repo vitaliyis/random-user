@@ -1,34 +1,9 @@
-import React, {useState} from "react";
-import {CopyToClipboard} from "react-copy-to-clipboard";
+import React from "react";
 import {getPhone, transformDate} from "../../../../../utils/utils";
+import CopyToClipboardContainer from "../../CopyToClipboardContainer/CopyToClipboardContainer";
 
 const TableItem = props => {
-  const [copyEmail, setCopyEmail] = useState('');
-  const [copyPhone, setCopyPhone] = useState('');
-  const [copyLocation, setCopyLocation] = useState('');
-
   const {item} = props;
-
-  const onCopyEmail = () => {
-    setCopyEmail('Copied.');
-    setTimeout(() => {
-      setCopyEmail('');
-    }, 2000)
-  }
-
-  const onCopyPhone = () => {
-    setCopyPhone('Copied.');
-    setTimeout(() => {
-      setCopyPhone('');
-    }, 2000)
-  }
-
-  const onCopyLocation = () => {
-    setCopyLocation('Copied.');
-    setTimeout(() => {
-      setCopyLocation('');
-    }, 2000)
-  }
 
   return (
     <tr>
@@ -42,21 +17,15 @@ const TableItem = props => {
       </td>
       <td>
         <p><a href={`mailto:${item.email}`}>{item.email}</a></p>
-        <CopyToClipboard onCopy={onCopyEmail} text={item.email}>
-          <button className={`btn ${copyEmail ? "btn-outline-success" : "btn-outline-primary"} btn-sm btn-clipboard`}>{`${copyEmail ? copyEmail : "copy"}`}</button>
-        </CopyToClipboard>
+        <CopyToClipboardContainer value={item.email}/>
       </td>
       <td>
         <p><a href={`tel:${getPhone(item.phone)}`}>{item.phone}</a></p>
-        <CopyToClipboard onCopy={onCopyPhone} text={item.phone}>
-          <button className={`btn ${copyPhone ? "btn-outline-success" : "btn-outline-primary"} btn-sm btn-clipboard`}>{`${copyPhone ? copyPhone : "copy"}`}</button>
-        </CopyToClipboard>
+        <CopyToClipboardContainer value={item.phone}/>
       </td>
       <td>
         <p>{`${item.location.country} ${item.location.street.number} ${item.location.street.name} ${item.location.state} ${item.location.postcode}`}</p>
-        <CopyToClipboard onCopy={onCopyLocation} text={`${item.location.country} ${item.location.street.number} ${item.location.street.name} ${item.location.state} ${item.location.postcode}`}>
-          <button className={`btn ${copyLocation ? "btn-outline-success" : "btn-outline-primary"} btn-sm btn-clipboard`}>{`${copyLocation ? copyLocation : "copy"}`}</button>
-        </CopyToClipboard>
+        <CopyToClipboardContainer value={`${item.location.country} ${item.location.street.number} ${item.location.street.name} ${item.location.state} ${item.location.postcode}`}/>
       </td>
       <td>{item.nat}</td>
     </tr>
